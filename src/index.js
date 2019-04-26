@@ -1,6 +1,7 @@
 import list from "./actions/list";
 import add from "./actions/add";
 import remove from "./actions/remove";
+import update from "./actions/update";
 
 const picturesGridElement = document.getElementById("pictures-grid");
 const pictureInputElement = document.getElementById("picture-url-input");
@@ -34,6 +35,18 @@ const refreshGrid = () => {
       refreshGrid();
     });
 
+    const updateButtonElement = clone.querySelector(
+      ".picture-item-update-button"
+    );
+    
+    updateButtonElement.addEventListener("click", () => {
+      const new_url = prompt()
+      if (new_url) {
+        update(i, new_url.trim())
+        refreshGrid();
+      }
+    });
+    
     fragment.appendChild(clone);
   });
 
@@ -45,9 +58,12 @@ const addPictureHandler = () => {
   const url = getInputContents();
   // FIXME: use your actions functions to add a new picture
   // FIXME: bonus, trim eventual whitespaces and validate content
-  add(url.trim());
-  refreshGrid();
-  clearInputContents();
+  const clean_url = url.trim();
+  if (clean_url) {
+    add(clean_url);
+    refreshGrid();
+    clearInputContents();
+  }
 };
 
 refreshGrid();

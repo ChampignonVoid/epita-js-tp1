@@ -12,7 +12,7 @@ import { getState, setState } from '../store'
 
 const add = (elt) => {
     const oldList = getState();
-    const newList = [...oldList, elt];
+    const newList = oldList.slice(0).concat(elt);
     setState(newList);
 };
 

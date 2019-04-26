@@ -11,11 +11,14 @@
 import { getState, setState } from '../store'
 
 
-const update = (index, new_value) => {
+const update = (old_value, new_value) => {
     const oldList = getState();
-    const newList = [...oldList];
-    newList[index] = new_value;
-    setState(newList);
+    const index = oldList.findIndex(x => x === old_value);
+    if (index) {
+        const newList = [...oldList];
+        newList[index] = new_value;
+        setState(newList);
+    }
 };
 
 export default update;
